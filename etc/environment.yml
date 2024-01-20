@@ -1,0 +1,17 @@
+name: mikro-snek
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python
+  - pip
+  - r-base
+  - r-tidyverse
+  - bioconductor-dada2
+  - bioconductor-biostrings
+  - bioconductor-shortread
+  - bioconductor-decipher
+  - python-wget
+  - biopython
+  - cutadapt

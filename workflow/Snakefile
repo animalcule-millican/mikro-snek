@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+from evalfasta.evalfasta import *
+
+configfile: "/home/glbrc.org/millican/repos/mikro-snek/workflow/config.yml"
+
+seq_count, seq_len = get_seq_metrics(config["sequence_files"])
+num_chunks = get_chunky(int(config["split_chunks"]))
+
+# import dada2 workflow module
+module dada2_workflow:
+    snakefile:
+        "dada2_workflow.smk"
+    config:
+        config
+
+use rule * from dada2_workflow
+
+# import taxonomy workflow module
+module taxonomy_workflow:
+    snakefile:
+        "taxonomy_workflow.smk"
+    config:
+        config
+use rule * from taxonomy_workflow
+
+
+rule all:
+    input:
+        #expand("{proj_dir}/data/output/asv.tree", proj_dir = config["project_directory"]),
+        expand("{proj_dir}/data/output/seqtab_nochim.RData", proj_dir = config["project_directory"]),
+        expand("{proj_dir}/data/output/species_taxonomy.RData", proj_dir = config["project_directory"]),
+        #expand("{proj_dir}/data/output/asv.fasta", proj_dir = config["project_directory"]),
+        expand("{proj_dir}/data/output/dada_{orientation}_{chunks}.RData", orientation = config["orientation"], chunks=num_chunks, proj_dir=config["project_directory"])
+    default_target: True

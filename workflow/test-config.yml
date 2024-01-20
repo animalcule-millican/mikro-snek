@@ -1,0 +1,6 @@
+taxonomy_file: "/home/glbrc.org/millican/repos/mikro-snek/data/refs/taxonomy_reference.fna.gz"
+species_file: "/home/glbrc.org/millican/repos/mikro-snek/data/refs/add_species_reference.fna.gz"
+orientation: ['fwd','rev']
+sequence_files: "/home/glbrc.org/millican/repos/mikro-snek/data/seqs/its/rna"
+split_chunks: 50
+project_directory: "/home/glbrc.org/millican/repos/mikro-snek"
